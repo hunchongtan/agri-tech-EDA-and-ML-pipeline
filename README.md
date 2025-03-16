@@ -10,6 +10,7 @@ Secondary Email Address: **tanhunchong01@gmail.com** (preferred due to strict sc
 
     .
     ├── .github                 # Contains scripts to execute the end-to-end machine learning pipeline using GitHub Actions
+    ├── .gitignore              # Insert your own data/agri.db (not in the GitHub)
     ├── src                     # Contains python files constituting the end-to-end ML pipeline
     │   ├── (python files constituting the end-to-end ML pipeline in .py format)         
     │   └──    
