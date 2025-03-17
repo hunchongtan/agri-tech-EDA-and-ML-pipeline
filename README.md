@@ -114,13 +114,15 @@ Predictions are made for new data points.
 - Humidity Sensor data was dropped due to the high percentage of null values.
 - There were a few negative values in the dataset, which were dropped because sensor data cannot logically be negative.
 - Categorical features such as Plant Type and Plant Stage were transformed using one-hot encoding.
-- Numeric features needed to undergo standardised scaling to make the models converge better.
+- Numeric features can undergo standardised scaling to make the models (especially classification models) converge better.
 
 ## f. Describe how the features in the dataset are processed (summarised in a table).
 
 *All numeric features also undergo Outlier Removal and Data Type Conversion to numeric.*
 
 #### Task 2A: Predicting Tempature Conditions
+*Standardised scaling not done for numeric features since Random Forest Regressor and XGBoost generally do not need scaling.*
+
 Target Feature: ```Temperature Sensor (°C)```
 
 | Feature Name                  | Data Type   | Processing Applied                         | Feature Engineering                        |
@@ -129,17 +131,17 @@ Target Feature: ```Temperature Sensor (°C)```
 | Previous Cycle Plant Type      | Categorical | Convert to lowercase                      | One-Hot Encoding                          |
 | Plant Type                     | Categorical | Convert to lowercase                      | One-Hot Encoding                          |
 | Plant Stage                    | Categorical | Convert to lowercase                      | One-Hot Encoding                          |
-| Temperature Sensor (°C)        | Numerical   | Drop Negative Values                      | Standard Scaling                          |
-| **Humidity Sensor (%)**        | Numerical   | **Dropped due to a high percentage of null values** | -                               |
-| Light Intensity Sensor (lux)   | Numerical   | Median Imputation, Drop Negative Values   | Standard Scaling                          |
-| CO2 Sensor (ppm)               | Numerical   | -                                         | Standard Scaling                          |
-| O2 Sensor (ppm)                | Numerical   | -                                         | Standard Scaling                          |
-| EC Sensor (dS/m)               | Numerical   | Drop Negative Values                      | Standard Scaling                          |
-| Nutrient N Sensor (ppm)        | Numerical   | Mean Imputation                           | Standard Scaling                          |
-| Nutrient P Sensor (ppm)        | Numerical   | Mean Imputation                           | Standard Scaling                          |
-| Nutrient K Sensor (ppm)        | Numerical   | Median Imputation                         | Standard Scaling                          |
-| Water Level Sensor (mm)        | Numerical   | Mean Imputation                           | Standard Scaling                          |
-| pH Sensor                      | Numerical   | -                                         | Standard Scaling                          |
+| **Temperature Sensor (°C)**    | Numerical   | Drop Negative Values                      | -                                         |
+| *Humidity Sensor (%)*          | Numerical   | **Dropped due to a high percentage of null values** | -                               |
+| Light Intensity Sensor (lux)   | Numerical   | Median Imputation, Drop Negative Values   | -                                         |
+| CO2 Sensor (ppm)               | Numerical   | -                                         | -                                         |
+| O2 Sensor (ppm)                | Numerical   | -                                         | -                                         |
+| EC Sensor (dS/m)               | Numerical   | Drop Negative Values                      | -                                         |
+| Nutrient N Sensor (ppm)        | Numerical   | Mean Imputation                           | -                                         |
+| Nutrient P Sensor (ppm)        | Numerical   | Mean Imputation                           | -                                         |
+| Nutrient K Sensor (ppm)        | Numerical   | Median Imputation                         | -                                         |
+| Water Level Sensor (mm)        | Numerical   | Mean Imputation                           | -                                         |
+| pH Sensor                      | Numerical   | -                                         | -                                         |
 
 #### Task 2B: Categorising Plant Type-Stage
 *As the task only states categorisation based on sensor data (numeric features), all categorical features are ignored.*
@@ -149,8 +151,9 @@ Target Feature: ```Plant Type-Stage```
 
 | Feature Name                  | Data Type   | Processing Applied                         | Feature Engineering                        |
 |--------------------------------|------------|--------------------------------------------|--------------------------------------------|
+| **Plant Type-Stage**           | Categorical | Combine 'Plant Type' + 'Plant Stage'      | -                                         |
 | Temperature Sensor (°C)        | Numerical   | Drop Negative Values                      | Standard Scaling                          |
-| **Humidity Sensor (%)**        | Numerical   | **Dropped due to a high percentage of null values** | -                               |
+| *Humidity Sensor (%)*          | Numerical   | **Dropped due to a high percentage of null values** | -                               |
 | Light Intensity Sensor (lux)   | Numerical   | Median Imputation, Drop Negative Values   | Standard Scaling                          |
 | CO2 Sensor (ppm)               | Numerical   | -                                         | Standard Scaling                          |
 | O2 Sensor (ppm)                | Numerical   | -                                         | Standard Scaling                          |
@@ -160,6 +163,8 @@ Target Feature: ```Plant Type-Stage```
 | Nutrient K Sensor (ppm)        | Numerical   | Median Imputation                         | Standard Scaling                          |
 | Water Level Sensor (mm)        | Numerical   | Mean Imputation                           | Standard Scaling                          |
 | pH Sensor                      | Numerical   | -                                         | Standard Scaling                          |
+
+*Sidenote: Without scaling, classification models were giving scores of 1.000. This is a sign of overfitting and potential data leakage. As such, standard scaling was implemented on numerical features.
 
 ## g. Explanation of your choice of models for each machine learning task.
 The following models were selected for their effectiveness in each task:
