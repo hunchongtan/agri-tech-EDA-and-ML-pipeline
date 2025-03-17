@@ -1,6 +1,6 @@
-# Insert your own agri.db
-data
-
 # Keep the models folder empty to input new models
 src/models/*
 !src/models/.gitkeep
+
+# Don't upload data
+src/data

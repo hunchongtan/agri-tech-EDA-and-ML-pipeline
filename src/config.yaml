@@ -1,7 +1,3 @@
-data:
-  database: "../data/calls.db"
-  table: "farm_data"
-
 # Supported values for the task:
 # "regression" - for regression (Predicting temperature)
 # "classification" - for classification (Categorising Plant Type-Stage)
