@@ -5,5 +5,5 @@ src/models/*
 # Don't upload data
 src/data
 
-# Cache
-__pycache__/
+# Ignore all cache directories
+**/__pycache__/
