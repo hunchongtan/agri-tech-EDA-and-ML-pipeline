@@ -85,7 +85,7 @@ A set of three classification models are trained:
 
 The best model is selected based on accuracy, precision, recall, and F1-score.
 
-### 4. Model Deployment and Prediction (main.py)
+### 4. Model Deployment and Prediction (```main.py```)
 The best-performing models are saved in the ```models/``` directory.
 During inference, the trained models are automatically loaded.
 Predictions are made for new data points.
@@ -144,6 +144,7 @@ Target Feature: ```Temperature Sensor (°C)```
 #### Task 2B: Categorising Plant Type-Stage
 *As the task only states categorisation based on sensor data (numeric features), all categorical features are ignored.*
 *A new column ['Plant Type-Stage'] is created by combining ['Plant Type'] + '-' + ['Plant Stage'].*
+
 Target Feature: ```Plant Type-Stage```
 
 | Feature Name                  | Data Type   | Processing Applied                         | Feature Engineering                        |
@@ -161,8 +162,77 @@ Target Feature: ```Plant Type-Stage```
 | pH Sensor                      | Numerical   | -                                         | Standard Scaling                          |
 
 ## g. Explanation of your choice of models for each machine learning task.
+The following models were selected for their effectiveness in each task:
 
+#### Task 2A: Predicting Tempature Conditions (Regression Models)
+Temperature prediction requires a regression model since the target variable is continuous.
+The following 3 models were chosen:
+##### 1. Linear Regression:
+- Acts as a baseline model to assess performance against more complex models.
+- Easy to intrepret
+- Works well when the relationship between features and temperature is approximately linear.
+
+##### 2. Random Forest Regressor
+- Handles non-linear relationships better than Linear Regression.
+- Uses multiple decision trees, reducing the impact of outliers and noisy data.
+- Less prone to overfitting due to its ensemble approach.
+
+##### 3. XGBoost Regressor
+- High-performance boosting algorithm known for its predictive accuracy.
+- Less prone to overfitting due to its built-in regularisation.
+- Easy to undergo hyperparameter tuning for further fine-tuning.
+
+#### Task 2B: Categorising Plant Type-Stage (Classification Models)
+For categorising plant type-stage, a classification model was necessary.
+The following 3 models were chosen:
+##### 1. Logistic Regression
+- Acts as a baseline model to assess performance against more complex models.
+- Easy to intrepret
+- Works well when the target categories are linearly separable.
+
+##### 2. Random Forest Classifier
+- Handles both categorical and numerical features effectively, reducing the need for extensive preprocessing.
+- Uses multiple decision trees, reducing the impact of outliers and noisy data.
+- Less prone to overfitting due to its ensemble approach.
+
+##### 3. Support Vector Machine (SVM)
+- Effective for classification problems with complex decision boundaries.
+- Uses a kernel trick to transform data into higher-dimensional space, improving accuracy for non-linearly separable data.
+- Provides high accuracy in well-defined classification tasks.
 
 ## h. Evaluation of the models developed. Any metrics used in the evaluation should also be explained.
+All models (if applicable) undergo hyperparameter tuning using Grid Search to find the optimal parameters.
+
+##### Hyperparameter Tuning with Grid Search
+Grid Search systematically tests different hyperparameter combinations to identify the best-performing model. It evaluates multiple configurations based on a chosen metric (e.g., R² for regression or accuracy for classification) and selects the optimal parameters.
+
+#### Task 2A: Predicting Tempature Conditions (Regression Models)
+![image](https://github.com/user-attachments/assets/359e1ea9-b8d3-450d-bc31-2308603b1b1b)
+
+##### Regression Evaluation Metrics:
+- R² Score: Measures how well the model fits the data. A higher R² (closer to 1) indicates a better fit.
+- Root Mean Squared Error (RMSE): Evaluates prediction error magnitude. A lower RMSE indicates more precise predictions.
+
+We use the R² Score as the main evaluation metric since it directly indicates how well the model captures variations in temperature.
+
+##### Winner: Random Forest Regressor ({'max_depth': 10, 'n_estimators': 200}) with R² Score: 0.565
+
+#### Task 2B: Categorising Plant Type-Stage (Classification Models)
+![image](https://github.com/user-attachments/assets/9785c398-6b52-433a-8538-c4d9d00125ed)
+
+##### Classification Evaluation Metrics:
+Accuracy: Percentage of correct classifications.
+Precision: Percentage of relevant predictions among all positive predictions.
+Recall: Ability of the model to find all relevant cases.
+F1-Score: Harmonic mean of Precision and Recall.
+
+We use Accuracy as the primary metric since it provides a clear overall measure of classification performance.
+
+##### Winner: Random Forest Classifier ({'max_depth': None, 'n_estimators': 100}) with Accuracy: 0.769
 
 ## i. Other considerations for deploying the models developed.
+1. The pipeline is designed to handle large datasets efficiently with minimal modifications.
+2. The entire workflow, from data preprocessing to model training and fine-tuning, is automated. Simply running bash run.sh can quickly retrain and evaluate models.
+3. The config.yaml file allows users to modify tasks (regression, classification, or both) without changing the code. This ensures flexibility in running different experiments based on user needs.
+4. From personal testing, the models train and evaluate quickly, making the pipeline suitable for rapid iteration.
+5. Best models are also stored in the pipeline. If not necessary to retrain models, a simple comment on the model training code snippet in main.py can allow the same models to be used over and over again.
