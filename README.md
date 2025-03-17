@@ -230,6 +230,11 @@ We use Accuracy as the primary metric since it provides a clear overall measure 
 
 ##### Winner: Random Forest Classifier ({'max_depth': None, 'n_estimators': 100}) with Accuracy: 0.769
 
+#### Predictions
+With these winning models, we can make our predictions! :)
+
+![image](https://github.com/user-attachments/assets/2359d3c0-92aa-4877-ada4-a1cbe6eff1a1)
+
 ## i. Other considerations for deploying the models developed.
 1. The pipeline is designed to handle large datasets efficiently with minimal modifications.
 2. The entire workflow, from data preprocessing to model training and fine-tuning, is automated. Simply running bash run.sh can quickly retrain and evaluate models.
