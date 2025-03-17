@@ -137,6 +137,12 @@ def model_train_and_evaluate(df):
         df_reg = pd.get_dummies(df_reg, columns=categorical_features, drop_first=True)
 
         X_train, X_test, y_train, y_test = train_test_split_data(df_reg, target_col)
+
+        # Scale numeric features to help models converge
+        scaler = StandardScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
+        
         best_model, best_model_name = find_best_model(models["regression"], X_train, y_train, X_test, y_test, "regression")
         joblib.dump(best_model, f"models/{best_model_name}_regression.pkl")
 
