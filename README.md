@@ -1,10 +1,23 @@
-# AIIP5 - AIIP Technical Assessment Submission
+# Agri-Tech Company EDA & End-to-end ML Pipeline
 
-## a. Applicant information.
+## a. Task Details.
 
-Applicant Name: **Tan Hun Chong** \
-Email Address: **hunchong_tan@mymail.sutd.edu.sg** (previously stated on the application form) \
-Secondary Email Address: **tanhunchong01@gmail.com** (preferred due to strict school email quarantines)
+### 1. Exploratory Data Analysis (EDA) in Jupyter Notebook
+Using the given dataset, conduct an EDA and create an interactive notebook (.ipynb file) in Python that can be used as a presentation to explain the findings of your analysis. 
+It should contain appropriate visualisations and explanations to assist readers in understanding how these elaborations are arrived at and their implications.
+
+### 2. End-to-end Machine Learning Pipeline in Python Scripts (`.py`)
+Design and create a machine learning pipeline (MLP) in Python scripts (`.py` files) that will ingest and process the entailed dataset, subsequently, feeding it into the machine learning algorithm(s) of your choice. 
+
+### Additional Details
+#### Problem Statement 
+As a ML engineer in an agri-tech company, you are tasked with developing ML models to address these challenges. Your goal is to:
+(1) create models to predict the temperature conditions within the farm's closed environment, ensuring optimal plant growth; and
+(2) develop models to categorise the combined "Plant Type-Stage" based on sensor data.  
+
+#### Dataset  
+The dataset contains sensor readings and plant-related information collected from various agricultural zones within a controlled environment.
+
 
 ## b. Overview of the submitted folder and the folder structure.
 
